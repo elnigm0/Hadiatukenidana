@@ -1,0 +1,695 @@
+*{
+  padding: 0;
+  margin: 0;
+  font-family: "Cairo", sans-serif;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+  box-sizing: border-box;
+}
+a {
+    font-family: "Cairo", sans-serif;
+}
+body {
+    
+}
+
+/*
+=============================
+=======Start navigation======
+=============================
+*/
+/* أنماط الهيدر الأساسية */
+header {
+    background: #ff80c8;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    position: fixed;
+    z-index: 999;
+    height: 80px;
+    top: 0;
+}
+
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    height: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+.navigation a,li {
+    color: #fff;
+    text-decoration: none;
+    border: none;
+    list-style: none;
+}
+/****** Start logo******/
+/* تنسيق اللوجو الأساسي */
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    flex-wrap: wrap; /* يسمح بالتفاف العناصر عند الضرورة */
+    justify-content: center; /* توسيط العناصر عند الالتفاف */
+}
+
+.logo-text {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.logo img {
+    width: 90px;
+    height: 70px;
+    aspect-ratio: 3/4; /* الحفاظ على نسبة العرض إلى الارتفاع */
+    object-fit: contain;
+    transition: transform 0.3s ease;
+}
+
+.logo h1 {
+    color: #fff;
+    font-size: clamp(14px, 4vw, 20px); /* حجم خط متجاوب */
+    margin: 0;
+    white-space: nowrap;
+    transition: all 0.3s ease;
+}
+
+.kemet-caption {
+    color: aqua;
+    font-size: clamp(10px, 3vw, 14px); /* حجم خط متجاوب */
+    margin-top: clamp(2px, 1vw, 5px); /* هامش مرن */
+    letter-spacing: 0.5px;
+    text-shadow: 0 0 3px rgba(0, 255, 255, 0.5);
+    font-weight: bold;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+}
+
+/* تأثيرات الـ hover */
+.logo:hover img {
+    transform: scale(1.05);
+}
+
+.logo:hover h1 {
+    transform: scale(1.02);
+    box-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+}
+
+.logo:hover .kemet-caption {
+    letter-spacing: 1px;
+    text-shadow: 0 0 6px rgba(0, 255, 255, 0.8);
+}
+.navigation a:hover{
+    color: #ff3400;
+}
+
+
+/* تعديلات خاصة للشاشات الصغيرة جداً */
+@media (max-width: 400px) {
+    .logo {        
+        gap: 5px;
+    }
+    
+    .logo h1 {
+        white-space: normal; /* يسمح بلف النص إذا لزم الأمر */
+        font-size: 12px;
+    }
+    
+    .kemet-caption {
+        font-size: 10px;
+        margin-top: 2px;
+    }
+}
+
+/* تعديلات للشاشات المتوسطة */
+@media (min-width: 401px) and (max-width: 768px) {
+    .logo {
+        gap: 8px;
+    }
+    
+    .logo h1 {
+        font-size: 16px;
+        padding: 8px;
+    }
+    
+    .kemet-caption {
+        font-size: 12px;
+    }
+}
+/****** End logo******/
+
+/* أنماط القائمة للشاشات الكبيرة */
+@media (min-width: 769px) {
+    .hamburger {
+        display: none;
+    }
+    
+    .navigation ul {
+        display: flex;
+        gap: 20px;
+    }
+}
+
+/* أنماط القائمة للشاشات الصغيرة */
+@media (max-width: 768px) {
+    .hamburger {
+        display: flex;
+        padding: 15px;
+        cursor: pointer;
+        background: transparent;
+        border: 0;
+        z-index: 1001;
+        position: relative;
+    }
+    
+    .navigation {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 80%;
+        height: 100vh;
+        background: #ff80c8;
+        backdrop-filter: blur(10px);
+        transition: all 0.5s ease;
+        z-index: 1000;
+        padding-top: 100px;
+        box-shadow: -5px 0 15px rgba(0, 0, 0, 0.3);
+        list-style: none;
+        
+    }
+    .navigation a {
+        padding: 0;
+        color: #fff;
+        background: transparent;
+    }
+    .navigation.active {
+        right: 0;
+    }
+    
+    .navigation ul {
+        flex-direction: column;
+        align-items: center;
+        padding: 20px;
+        
+    }
+    
+    .navigation li {
+        margin: 15px 0;
+        opacity: 0;        
+        transform: translateX(20px);
+        transition: all 0.4s ease;
+        list-style: none;
+    }
+    
+    .navigation.active li {
+        opacity: 1;
+        transform: translateX(0);
+    }
+    
+    /*Affect botton  */
+    .hamburger-box {
+        width: 30px;
+        height: 24px;
+        display: inline-block;
+        position: relative;
+    }
+    
+    .hamburger-inner {
+        width: 100%;
+        height: 3px;
+        background-color: white;
+        position: absolute;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        transition: all 0.3s ease;
+    }
+    
+    .hamburger-inner::before,
+    .hamburger-inner::after {
+        content: "";
+        width: 100%;
+        height: 3px;
+        background-color: white;
+        position: absolute;
+        left: 0;
+        transition: all 0.3s ease;
+    }
+    
+    .hamburger-inner::before {
+        top: -10px;
+    }
+    
+    .hamburger-inner::after {
+        bottom: -10px;
+    }
+    
+    .hamburger.active .hamburger-inner {
+        background-color: transparent;
+    }
+    
+    .hamburger.active .hamburger-inner::before {
+        transform: rotate(45deg) translate(5px, 5px);
+    }
+    
+    .hamburger.active .hamburger-inner::after {
+        transform: rotate(-45deg) translate(5px, -5px);
+    }
+}
+
+/*
+=============================
+========End navigation=======
+=============================
+*/
+
+/*  End  navigation */
+section {
+    padding: 100px 200px;
+}
+
+/* Start main */
+.main{
+    width:100% ;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    background-image: url("./background.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    
+}
+.main h2{
+    color: #fff;
+    font-size: 1.4em;
+    font-weight: 500;
+   
+}
+.main h2 span{
+    color: #b55b8e;    
+    font-size: 3em;
+    font-weight: 600;
+    display: inline-block;
+    margin-top: 10px;
+    
+
+}
+.main h3{
+    color: #fff;
+    background: #2d0c3092;
+    font-size: 2em;
+    font-weight:700 ;
+    letter-spacing: 1px;
+    margin-top: 10px;
+    margin-bottom: 30px;
+}
+
+.main-btn {
+    color: #fff;
+    background-color: #ff0049 ;
+    text-decoration: none;
+    font-size: 1em;
+    font-weight: 600;
+    display: inline-block;
+    padding: 0.9375em 2.1875em;
+    letter-spacing: 1px;
+    border-radius: 6px;
+    margin-bottom: 40px;
+    transition: 1.7s ease;
+}
+
+.main-btn:hover{   
+        background-color: #fff;
+        color: #bea400;
+}
+
+.social-icons a:hover{
+    color: silver;
+}
+/* End main */
+
+
+/*  Start sec2 */
+.title{
+    display: flex;
+    justify-content: center;
+    color:#00ffd5 ;
+    font-size: 2.2em;
+    font-weight: 800;
+    margin-bottom: 30px;
+    
+   
+}
+
+.content{
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+    
+}
+
+.card{
+    background-color: transparent;
+    width: 21.25em;    
+    border-radius: 10px;
+    padding:25px ;
+    margin: 15px;
+    transition: 1.7s ease;
+}
+
+.card:hover{
+    transform: scale(1.1);
+}
+
+.icon {
+    font-size: 8em;
+    text-align: center;
+    
+}
+
+.info{
+    text-align: center;
+}
+.info h3{
+    color: #fff;
+    font-size: 1.2em;
+    font-weight: 700;
+    margin: 10px;
+}
+.info p {
+    color: #00ffd5;
+}
+/*
+=============================
+=======Start  projects=======
+=============================
+*/
+
+.projects {
+    width: 100%;
+    height: auto;
+    background-size: cover;
+    display: flex;   
+    align-items: center;
+    justify-content: center;
+    background-position: center;
+    transition: background-image 1s ease-in-out;
+    background: #622135;
+}
+.projects .content{
+
+    display: flex;
+    flex-direction: row;
+    overflow-x:auto ;
+    overflow-y:auto ;
+    background: #622135;
+}
+.project-card{
+    background: linear-gradient(to right,#fff,#b50052);
+    border: 1px solid #000;
+    min-height: 14em;
+    width: 23em;
+    overflow: hidden;
+    border-radius: 10px;
+    margin: 20px ;   
+    transition: 0.7s ease;
+    
+}
+.project-card:hover{
+    transform: scale(1.1);
+}
+
+.project-image img{
+    width: 100%;
+    padding: 30px;
+    border-radius: 40px;
+}
+.project-card:hover .project-image{
+    opacity: 0.9;
+}
+
+.project-info{
+    padding: 1em;
+    
+}
+.project-category{
+    font-size: 0.8em ;
+    color: #000;   
+    padding: 10px; 
+}
+.project-title{
+    display: flex;
+    justify-content: space-between;
+    text-transform: uppercase;
+    font-weight: 800;
+    margin-top: 10px;
+    color: #fff;
+    padding: 10px;
+}
+.project-title a {
+    background: transparent;
+    border: 2px solid #55d5ff;
+    padding: 10px;
+    text-decoration: none;
+    color: #55d5ff;
+    border-radius: 15px;
+    font-size: 6px;
+}
+.project-title a:hover {
+    background: #55d5ff;
+    color: transparent;
+}
+.title {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    color: #fff;
+    font-size: 2.2em;
+    font-weight: 800;
+    margin-bottom: 80px;
+    background: transparent;
+    border: 2px solid #8098ff;
+    border-right: none;
+    border-left: none;
+    border-radius: 10px;
+    width: 100%;
+    margin-top: 80px;
+}
+.project-card {
+    scroll-snap-align: start;
+}
+details summary {
+    color: #fff;
+    font-size: 30px;
+}
+details img{
+    width: 80%;
+    display: flex;
+    height: 300px;
+}
+/*
+=============================
+========End  projects========
+=============================
+*/
+
+/* Start contact */
+.content .card {
+ background: #fff;
+}
+.contact .icon{
+
+    font-size: 4.5em;
+}
+
+.contact .info h3{
+    
+    color: #d76c74;
+    
+}
+
+.contact .info p {
+     font-size: 10px ;
+    color: #000;
+}
+.phone-icon {
+    color: #ffdc00;
+}
+
+
+.images img {
+    width: 100px;
+    height: 100px;
+  
+    border-radius: 50%;
+}
+
+.images h3 {
+    background: #fff;
+    text-align: center;
+    margin-top: 10px;
+    border-radius: 6px;
+    border-left: 5px solid yellow;
+    border-right: 5px solid green;
+    border-top: 5px solid blue;
+    border-bottom: 5px solid red;
+}
+.eng-card{
+    border: 1px solid #000;
+    min-height: 14em;
+    width: 23em;
+    overflow: hidden;
+    border-radius: 10px;  
+    transition: 0.7s ease;
+    
+}
+.eng-image img{
+    width: 100%;
+}
+.footer {
+    color: #fff;
+    padding: 2em;
+    display: flex;
+    justify-content: space-between;
+}
+
+.footer-title{
+    font-size: 1.3em;
+    font-weight: 600;
+}
+
+.footer-title span{
+    color: #5c40ff;
+}
+
+.footer. social-icons {
+    font-size: 1.3em;
+}
+/* Start icon footer */
+.footer .social-icons .first {
+    color:#0057ff ;
+    font-size: 30px;
+    margin-left: 10px ;
+    padding-right: 13px;
+    padding-left: 13px;
+    border-radius: 100%;
+    background-color: #fff;
+}
+.footer .social-icons .second {
+    color:#009d43 ;
+    font-size: 30px;
+    margin-left: 20px ;
+    padding-right: 15px;
+    padding-left: 15px;
+    border-radius: 100%;
+    background-color: #fff;
+}
+.footer .social-icons .third {
+    color:#ed000a ;
+    font-size: 30px;
+    padding-right: 10px;
+    padding-left: 10px;
+    border-radius: 100%;
+    background-color: #fff;
+    
+}
+/* End icon footer */
+
+.eng {
+    background-color: #000;
+}
+.eng a {
+    color: #fff;
+    font: 15px;
+    text-align: center;
+}
+.eng span {
+    color: #0096ff;
+}
+@media(max-width:1023px){
+    
+    header {
+        padding: 20px 12px;
+    }
+    
+    .navigation a{
+        padding-left: 10px;
+    }
+    .title {
+        font-size: 1.8em;
+    }
+    
+    section {
+        padding: 80px 20px;
+    }
+    
+    .min-content h2{
+        font-size: 1em;
+    }
+    
+    .min-content h3{
+        font-size: 1.6em;
+    }
+    
+    .content{
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    
+}
+
+@media(max-width:641px){
+
+    body {
+        font-size: 12px;
+    }
+   .min-content h2{
+        font-size: 0.8em;
+    }
+    
+   .min-content h3{
+        font-size: 1.4em;
+    }
+}
+
+
+@media(max-width:300px){
+    
+    body {
+        font-size: 10px;
+    }
+        details {
+        top: -2px;
+        right: -0px;
+
+    }
+}
+
+@media(max-width:435px){
+    
+    details {
+        top: -0.0px;
+        right: -0.0px;
+
+    }
+    
+}
+
+
+
+
+
+
+
+
+
+
+
